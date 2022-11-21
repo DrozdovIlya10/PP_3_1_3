@@ -57,7 +57,7 @@ public class AppContext {
         properties.put("spring.jpa.properties.hibernate.dialect", environment.getRequiredProperty("spring.jpa.properties.hibernate.dialect"));
 
 
-    return properties;
+        return properties;
     }
 
     @Bean

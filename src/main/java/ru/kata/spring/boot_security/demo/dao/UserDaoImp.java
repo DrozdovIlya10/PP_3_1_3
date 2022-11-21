@@ -7,7 +7,6 @@ import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
@@ -62,7 +61,7 @@ public class UserDaoImp implements UserDao {
     @Override
     public User getUserByUsername(String username) {
         List<User> list = getListUsers();
-        User user = list.stream().filter(user1->username.equals(user1.getUsername())).findAny().orElse(null);
+        User user = list.stream().filter(user1 -> username.equals(user1.getUsername())).findAny().orElse(null);
         return user;
     }
 }

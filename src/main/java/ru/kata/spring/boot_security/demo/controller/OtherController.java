@@ -14,6 +14,7 @@ public class OtherController {
     public OtherController(UserService userService) {
         this.userService = userService;
     }
+
     @RequestMapping(method = RequestMethod.GET)
     public String open() {
         return "/index";

@@ -8,15 +8,15 @@
 
 <form th:method="PATCH" th:action="@{/admin/edit/{id}(id = ${user.getId()})}" th:object="${user}">
 
-        <label for="username"> Enter name: </label>
-        <input type="text" th:field="*{username}" id="username"/>
-        <br/>
-        <label for="password"> Enter password: </label>
-        <input type="text" th:field="*{password}" id="password"/>
-        <br/>
-        <label for="role"> Enter role: </label>
-        <input type="text" th:field="*{roles}"  id="role"/>
-        <br/>
+    <label for="username"> Enter name: </label>
+    <input type="text" th:field="*{username}" id="username"/>
+    <br/>
+    <label for="password"> Enter password: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <br/>
+    <label for="role"> Enter role: </label>
+    <input type="text" th:field="*{roles}" id="role"/>
+    <br/>
 
     <input type="submit" value="Update!"/>
     <h3>___________________________________________________________</h3>

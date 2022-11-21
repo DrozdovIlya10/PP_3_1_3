@@ -18,6 +18,7 @@ public class UsersController {
     public UsersController(UserService userService) {
         this.userService = userService;
     }
+
     @RequestMapping(method = RequestMethod.GET)
     public String show(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

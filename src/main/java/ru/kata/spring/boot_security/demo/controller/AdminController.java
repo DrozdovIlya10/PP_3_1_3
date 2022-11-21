@@ -15,16 +15,17 @@ public class AdminController {
     public AdminController(UserService userService) {
         this.userService = userService;
     }
+
     @RequestMapping(value = "/panel", method = RequestMethod.GET)
     public String adminPanel(Model model) {
         model.addAttribute("people", userService.getListUsers());
         return "adminPanel";
     }
 
-    @RequestMapping(value = "/{id}/edit",method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable("id") long id, Role role) {
         model.addAttribute("user", userService.getIdForUser(id));
-        model.addAttribute("role",role);
+        model.addAttribute("role", role);
         return "edit";
     }
 
@@ -34,7 +35,7 @@ public class AdminController {
         return "user";
     }
 
-    @RequestMapping(value = "/edit/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
     public String update(@PathVariable("id") long id, @ModelAttribute("user") User user) {
         userService.setIdAndUserForEdit(id, user);
         return "redirect:/admin/panel";
