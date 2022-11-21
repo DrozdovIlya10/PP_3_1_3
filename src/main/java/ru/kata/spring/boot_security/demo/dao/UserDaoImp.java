@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.repository.UserRepository;
+
 
 
 import javax.persistence.EntityManager;
@@ -16,25 +16,22 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
+
     @PersistenceContext
     private EntityManager entityManager;
 
-    final UserRepository userRepository;
     final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserDaoImp(BCryptPasswordEncoder bCryptPasswordEncoder, UserRepository userRepository) {
+    public UserDaoImp(BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.userRepository = userRepository;
     }
 
     @Override
     public void setUserForSave(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         entityManager.persist(user);
         entityManager.flush();
-
     }
 
     @Override
@@ -64,7 +61,8 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User getUserByUsername(String username) {
-        User user = userRepository.findByUsername(username);
+        List<User> list = getListUsers();
+        User user = list.stream().filter(user1->username.equals(user1.getUsername())).findAny().orElse(null);
         return user;
     }
 }

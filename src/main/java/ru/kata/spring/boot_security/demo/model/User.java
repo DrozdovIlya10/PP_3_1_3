@@ -15,7 +15,7 @@ import java.util.Set;
 @Table(name = "t_user")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Size(min = 2, message = "Не меньше 5 знаков")
     private String username;
@@ -26,6 +26,12 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     public User() {
+    }
+
+    public User(String username, String password, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
