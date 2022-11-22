@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
@@ -16,10 +15,9 @@ import java.util.List;
 public class UserDaoImp implements UserDao {
 
 
+    final BCryptPasswordEncoder bCryptPasswordEncoder;
     @PersistenceContext
     private EntityManager entityManager;
-
-    final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserDaoImp(BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -54,7 +52,7 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public void setIdAndUserForEdit(long id, User user) {
+    public void setUserForEdit(User user) {
         entityManager.merge(user);
     }
 

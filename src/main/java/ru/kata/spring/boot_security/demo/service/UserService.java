@@ -11,7 +11,7 @@ public interface UserService {
 
     void setIdForDelete(Long id);
 
-    void setIdAndUserForEdit(long id, User user);
+    void setUserForEdit(User user);
 
     User getIdForUser(long id);
 

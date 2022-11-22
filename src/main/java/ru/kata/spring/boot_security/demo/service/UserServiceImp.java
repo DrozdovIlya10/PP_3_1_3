@@ -10,7 +10,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
 public class UserServiceImp implements UserService {
     private final UserDao userDao;
 
@@ -30,11 +29,13 @@ public class UserServiceImp implements UserService {
         userDao.setUserForSave(user);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<User> getListUsers() {
         return userDao.getListUsers();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public User getIdForUser(long id) {
         return userDao.getUserById(id);
@@ -42,10 +43,11 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     @Override
-    public void setIdAndUserForEdit(long id, User user) {
-        userDao.setIdAndUserForEdit(id, user);
+    public void setUserForEdit(User user) {
+        userDao.setUserForEdit(user);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public User getUserByUsername(String username) throws UsernameNotFoundException {
         return userDao.getUserByUsername(username);

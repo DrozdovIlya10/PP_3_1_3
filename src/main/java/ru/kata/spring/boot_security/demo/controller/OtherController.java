@@ -2,7 +2,10 @@ package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -15,19 +18,19 @@ public class OtherController {
         this.userService = userService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping()
     public String open() {
         return "/index";
     }
 
     //// ДЛЯ РЕГЕСТРАЦИИ //////
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @GetMapping(value = "/registration")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
         return "registration";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping()
     public String create(@ModelAttribute("user") User user) {
         userService.setUserForSave(user);
         return "redirect:/login";
